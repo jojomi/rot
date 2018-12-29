@@ -30,40 +30,42 @@ var add = func(cmd *cobra.Command, args []string) {
 		rotItem RotItem
 		err     error
 	)
-	rotItem, err = NewRotItem(args[0], addDeleteIfModified)
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	if addDeleteIn != "" {
-		rotItem.SetDeletionDuration(addDeleteIn)
-	}
-	if addDeleteAt != "" {
-		var date time.Time
-		date, _ = time.Parse("2006-01-02 15:05:06", addDeleteAt)
-		if date.IsZero() {
-			date, _ = time.Parse("2006-01-02", addDeleteAt+" 23:59:59")
+	for _, arg := range args {
+		rotItem, err = NewRotItem(arg, addDeleteIfModified)
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
 		}
-		if !date.IsZero() {
-			rotItem.SetDeletionDate(date)
-		}
-	}
-	if rotItem.DeleteAt.IsZero() {
-		fmt.Println("No valid date given for deletion (use either --at or --in)")
-		os.Exit(2)
-	}
 
-	data, err := load()
-	if err != nil {
-		fmt.Println("loading failed")
-		os.Exit(1)
-	}
-	data = append(data, rotItem)
-	err = save(data)
-	if err != nil {
-		fmt.Println("Saving failed")
-		os.Exit(1)
+		if addDeleteIn != "" {
+			rotItem.SetDeletionDuration(addDeleteIn)
+		}
+		if addDeleteAt != "" {
+			var date time.Time
+			date, _ = time.Parse("2006-01-02 15:05:06", addDeleteAt)
+			if date.IsZero() {
+				date, _ = time.Parse("2006-01-02", addDeleteAt+" 23:59:59")
+			}
+			if !date.IsZero() {
+				rotItem.SetDeletionDate(date)
+			}
+		}
+		if rotItem.DeleteAt.IsZero() {
+			fmt.Println("No valid date given for deletion (use either --at or --in)")
+			os.Exit(2)
+		}
+
+		data, err := load()
+		if err != nil {
+			fmt.Println("loading failed")
+			os.Exit(1)
+		}
+		data = append(data, rotItem)
+		err = save(data)
+		if err != nil {
+			fmt.Println("Saving failed")
+			os.Exit(1)
+		}
 	}
 }
 

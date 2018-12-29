@@ -14,7 +14,6 @@ var listChangedOnly bool
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List the files and folders current rotting",
-	Long:  `List the files and folders current rotting.`,
 	Run:   list,
 }
 
@@ -25,6 +24,11 @@ var list = func(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
+	/*
+	 * broken for umlauts:
+	 * The Writer assumes that all Unicode code points have the same width; this may not be true in some fonts or if the string contains combining characters.
+	 * source: https://golang.org/pkg/text/tabwriter/
+	 */
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 1, 3, ' ', 0)
 

@@ -71,12 +71,12 @@ var list = func(cmd *cobra.Command, args []string) {
 		fmt.Fprintln(w,
 			fmt.Sprintf("%d\t%s\t%s\t%s\t%s\t%s\t%s",
 				i+1,
-				rotItem.DeleteAt.Format("2006-01-02 15:05:06"),
+				rotItem.DeleteAt.Format("2006-01-02 15:04:05"),
 				changedString,
 				deleteIfChanged,
 				dataType,
 				rotItem.Path,
-				rotItem.AddedAt.Format("2006-01-02 15:05:06"),
+				rotItem.AddedAt.Format("2006-01-02 15:04:05"),
 			),
 		)
 	}

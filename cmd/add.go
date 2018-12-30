@@ -42,7 +42,7 @@ var add = func(cmd *cobra.Command, args []string) {
 		}
 		if addDeleteAt != "" {
 			var date time.Time
-			date, _ = time.Parse("2006-01-02 15:05:06", addDeleteAt)
+			date, _ = time.Parse("2006-01-02 15:04:05", addDeleteAt)
 			if date.IsZero() {
 				date, _ = time.Parse("2006-01-02", addDeleteAt+" 23:59:59")
 			}

@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/spf13/afero"
@@ -106,8 +107,8 @@ func (r RotItem) Clean(referenceDate time.Time, dryRun bool) (deleted bool, err 
 }
 
 func parseDuration(str string) time.Duration {
-	durationRegex := regexp.MustCompile(`P(?P<years>\d+Y)?(?P<months>\d+M)?(?P<days>\d+D)?T?(?P<hours>\d+H)?(?P<minutes>\d+M)?(?P<seconds>\d+S)?`)
-	matches := durationRegex.FindStringSubmatch(str)
+	durationRegex := regexp.MustCompile(`^P?(?P<years>\d+Y)?(?P<months>\d+M)?(?P<days>\d+D)?T?(?P<hours>\d+H)?(?P<minutes>\d+M)?(?P<seconds>\d+S)?$`)
+	matches := durationRegex.FindStringSubmatch(strings.ToUpper(str))
 
 	years := parseInt64(matches[1])
 	months := parseInt64(matches[2])

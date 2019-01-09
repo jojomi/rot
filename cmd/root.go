@@ -14,8 +14,7 @@ var AppFs afero.Fs = afero.NewOsFs()
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "rot",
-	Short: "rot empowers you to stage files and folders for rotting (later deletion).",
-	Long:  `rot empowers you to stage files and folders for rotting (later deletion).`,
+	Short: `rot empowers you to stage files and folders for rotting (later deletion).`,
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.

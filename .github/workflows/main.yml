@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - '*'
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: GoReleaser Action
+      uses: goreleaser/goreleaser-action@v1.4.0
+      #with:

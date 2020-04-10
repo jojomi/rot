@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - '*'
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   goreleaser:
@@ -18,4 +15,3 @@ jobs:
 
     - name: GoReleaser Action
       uses: goreleaser/goreleaser-action@v1.4.0
-      #with:

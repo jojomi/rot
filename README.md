@@ -30,7 +30,7 @@ You could use `rot clean --dry-run` for monitoring if there are files that shoul
 
 # Downloads
 
-Currently this project is in **alpha** status. This means even though there is unit tests for the basic features it still needs to be tested with real life use cases. This is why there is not binaries for downloads as of yet.
+Currently this project is in **alpha** status. This means even though there is unit tests for the basic features it still needs to be tested with real life use cases. Ready-built binaries can be downloaded on the [releases page](https://github.com/jojomi/rot/releases).
 
 You can build and run this code like any other [Go](https://golang.org) code:
 

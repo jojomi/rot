@@ -1,56 +1,42 @@
-# This is an example goreleaser.yaml file with some sane defaults.
-# Make sure to check the documentation at http://goreleaser.com
-# Put github token to ~/.config/goreleaser/github_token
-
 before:
   hooks:
-  - go mod download
-
+    - go mod tidy
+    - go generate ./...
 builds:
-  - goos:
-    - linux
-    - darwin
-    - windows
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
     goarch:
-    - amd64
+      - amd64
     ldflags:
-    - -s -w -X github.com/jojomi/rot/cmd.version={{.Version}} -X github.com/jojomi/rot/cmd.commit={{.Commit}} -X github.com/jojomi/rot/cmd.date={{.Date}} -X github.com/jojomi/rot/cmd.builtBy=goreleaser
-    env:
-    - CGO_ENABLED=0
-
+      - -s -w -X github.com/jojomi/rot/cmd.version={{.Version}} -X github.com/jojomi/rot/cmd.commit={{.Commit}} -X github.com/jojomi/rot/cmd.date={{.Date}} -X github.com/jojomi/rot/cmd.builtBy=goreleaser
 archives:
   - replacements:
-      amd64:  x86_64
-      darwin: macosx
+      darwin: MacOS X
+      linux: Linux
+      windows: Windows
+      amd64: 64-bit
     format_overrides:
       - goos: windows
         format: zip
-
 checksum:
   name_template: 'checksums.txt'
-
 snapshot:
-  name_template: "snapshot"
-
-nfpms:
-  - id: rot-package
-    vendor: jojomi
-    homepage: https://github.com/jojomi/rot
-    maintainer: jojomi <dev.jojomi@yahoo.com>
-    description: rot allows you to stage files and directories for later deletion.
-    license: MIT
-    formats:
-      - deb
-      - rpm
-    # TODO add default config and sample cron.d file via config_files and files
-
+  name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
-
-
+      - '^docs:'
+      - '^test:'
 release:
+  github:
+    owner: jojomi
+    name: rot
   draft: true
+  prerelease: auto
+source:
+  enabled: true

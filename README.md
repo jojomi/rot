@@ -34,7 +34,7 @@ Currently this project is in **alpha** status. This means even though there is u
 
 You can build and run this code like any other [Go](https://golang.org) code:
 
-    go get github.com/jojomi/rot
+    go install github.com/jojomi/rot@latest
 
 
 # Development

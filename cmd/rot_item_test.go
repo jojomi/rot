@@ -9,9 +9,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var now time.Time = makeTestDate(2017, 11, 22)
-var yesterday time.Time = makeTestDate(2017, 11, 21)
-var tomorrow time.Time = makeTestDate(2017, 11, 23)
+var now = makeTestDate(2017, 11, 22)
+var yesterday = makeTestDate(2017, 11, 21)
+var tomorrow = makeTestDate(2017, 11, 23)
 
 func TestIsRotten(t *testing.T) {
 	added := makeTestDate(2016, 10, 22)
@@ -109,7 +109,7 @@ func TestSetDeletionDuration(t *testing.T) {
 }
 
 func makeTestFile(filename string, content []byte) {
-	afero.WriteFile(AppFs, filename, content, os.FileMode(int(0777)))
+	afero.WriteFile(AppFs, filename, content, os.FileMode(0777))
 }
 
 func makeTestDate(year int, month time.Month, day int) time.Time {

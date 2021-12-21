@@ -30,7 +30,7 @@ var clean = func(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	rotItemsNew := []RotItem{}
+	var rotItemsNew []RotItem
 	now := time.Now()
 	for _, rotItem := range rotItems {
 		deleted, err = rotItem.Clean(now, cleanDryRun)

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -169,7 +170,12 @@ func hashFile(filename string) string {
 	if err != nil {
 		return ""
 	}
-	defer f.Close()
+	defer func(f afero.File) {
+		err := f.Close()
+		if err != nil {
+			log.Fatalf("could not hash file: %s", filename)
+		}
+	}(f)
 
 	h := sha256.New()
 	if _, err := io.Copy(h, f); err != nil {

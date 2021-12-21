@@ -3,7 +3,7 @@ package cmd
 import (
 	"encoding/json"
 
-	homedir "github.com/mitchellh/go-homedir"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/afero"
 )
 

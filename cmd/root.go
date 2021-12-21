@@ -15,7 +15,7 @@ var (
 )
 
 // AppFs is a layer of abstraction for the filesystem
-var AppFs afero.Fs = afero.NewOsFs()
+var AppFs = afero.NewOsFs()
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{

@@ -2,6 +2,8 @@
 dist/
 goreleaser
 rot
+test*
+testdir/
 
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
@@ -27,7 +29,3 @@ _testmain.go
 *.exe
 *.test
 *.prof
-
-
-# goreleaser script
-release.sh
